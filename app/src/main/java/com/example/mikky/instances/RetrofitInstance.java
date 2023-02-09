@@ -1,4 +1,4 @@
-package com.example.mikky;
+package com.example.mikky.instances;
 
 import java.security.cert.CertificateException;
 

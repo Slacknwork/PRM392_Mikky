@@ -1,6 +1,4 @@
-package com.example.mikky.model;
-
-import com.google.gson.annotations.SerializedName;
+package com.example.mikky.models;
 
 import java.util.ArrayList;
 

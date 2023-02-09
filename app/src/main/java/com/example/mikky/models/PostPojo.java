@@ -1,4 +1,4 @@
-package com.example.mikky;
+package com.example.mikky.models;
 
 public class PostPojo {
     private float userId;

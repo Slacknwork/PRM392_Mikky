@@ -1,8 +1,10 @@
-package com.example.mikky.controller;
+package com.example.mikky.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,11 +33,19 @@ public class MainActivity extends AppCompatActivity {
                 if (response.body().size()>0){
                     textView = (TextView)findViewById(R.id.textView1);
                     textView.setText("Product");
-                    Toast.makeText(MainActivity.this,"List is not empty",Toast.LENGTH_SHORT);
+                    Toast.makeText(MainActivity.this,"List is not empty",Toast.LENGTH_SHORT).show();
+                    textView.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent i = new Intent(MainActivity.this, LoginActivity.class);
+                            startActivity(i);
+
+                        }
+                    });
                 }else{
                     textView = (TextView)findViewById(R.id.textView1);
                     textView.setText("Failed");
-                    Toast.makeText(MainActivity.this,"List is empty",Toast.LENGTH_SHORT);
+                    Toast.makeText(MainActivity.this,"List is empty",Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -43,7 +53,14 @@ public class MainActivity extends AppCompatActivity {
             public void onFailure(Call<List<Product>> call, Throwable t) {
                 textView = (TextView)findViewById(R.id.textView1);
                 textView.setText(t.getLocalizedMessage());
-                Toast.makeText(MainActivity.this,"NOT WORKING",Toast.LENGTH_LONG);
+
+                textView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent i = new Intent(MainActivity.this, LoginActivity.class);
+                        startActivity(i);
+                    }
+                });
             }
 
         });
