@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33213.308
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MikkyShopBackEnd", "MikkyShopBackEnd.csproj", "{13829514-7FBA-4946-8D80-64220F8DE4A2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MikkyLibrary", "..\MikkyLibrary\MikkyLibrary.csproj", "{75612AA4-38A2-42DF-82A1-E2DE2A1A4A0D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{13829514-7FBA-4946-8D80-64220F8DE4A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13829514-7FBA-4946-8D80-64220F8DE4A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13829514-7FBA-4946-8D80-64220F8DE4A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13829514-7FBA-4946-8D80-64220F8DE4A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75612AA4-38A2-42DF-82A1-E2DE2A1A4A0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75612AA4-38A2-42DF-82A1-E2DE2A1A4A0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75612AA4-38A2-42DF-82A1-E2DE2A1A4A0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75612AA4-38A2-42DF-82A1-E2DE2A1A4A0D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {626540E4-AB38-497A-BAE2-25A0FA12F7F9}
+	EndGlobalSection
+EndGlobal

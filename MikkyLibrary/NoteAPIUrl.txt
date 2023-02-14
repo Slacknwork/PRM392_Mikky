@@ -1,0 +1,11 @@
+Format chung cho get 1 cái /Mikky/[tên dtb]?[tên column id của nó]=[id]
+		
+Trường hợp đặc biệt: 	/Mikky/Customer?Username= &Password=
+			/Mikky/Admin?Username= &Password=
+			/Mikky/Drink?Drinkname=
+-Drink: Get all, get 1 cái, put, post, delete
+-Customer: Get all, get 1 cái, put, post, delete
+-Order: Get all, get 1 cái, put, post, delete
+-Order detail: Get all, get 1 cái, put, post, delete
+-Drink Category: Get all, get 1 cái
+-Admin: Get all, get 1 cái
