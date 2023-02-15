@@ -100,7 +100,7 @@ namespace MikkyShopBackEnd.Sevices
             {
                 return new UserVM
                 {
-                    //UserId = user.UserId,
+                    UserId = user.UserId,
                     Username = user.Username,
                     Password = user.Password,
                     Address = user.Address,
