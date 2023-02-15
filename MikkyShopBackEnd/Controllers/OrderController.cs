@@ -49,6 +49,27 @@ namespace MikkyShopBackEnd.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
+        [HttpGet("Ordid={ordid}&Userid={usrid}")]
+        public IActionResult GetById(int ordid, int usrid)
+        {
+            try
+            {
+                var data = _ord.GetById(ordid,usrid);
+                if (data != null)
+                {
+                    return Ok(data);
+                }
+                else
+                {
+                    return NotFound();
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
 
         [HttpGet("Userid={usrid}")]
         public IActionResult GetByUserIdList(int usrid)

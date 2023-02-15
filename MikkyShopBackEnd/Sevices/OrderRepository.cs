@@ -87,7 +87,19 @@ namespace MikkyShopBackEnd.Sevices
 
         public OrderVM GetById(int id1, int id2)
         {
-            throw new System.NotImplementedException();
+            var ord = OrderExists(id1,id2);
+            if (ord != null)
+            {
+                return new OrderVM
+                {
+                    OrderId = ord.OrderId,
+                    UserId = ord.UserId,
+                    Date = ord.Date,
+                    Status = ord.Status,
+                    TotalPrice = ord.TotalPrice
+                };
+            }
+            return null;
         }
 
         public OrderVM GetByName(string name, string pwd)
@@ -136,6 +148,10 @@ namespace MikkyShopBackEnd.Sevices
         private Order OrderExists(int id)
         {
             return _context.Orders.SingleOrDefault(ord => ord.OrderId == id);
+        }
+        private Order OrderExists(int ordid,int usrid)
+        {
+            return _context.Orders.SingleOrDefault(ord => ord.OrderId == ordid && ord.UserId == usrid);
         }
     }
 }
