@@ -43,6 +43,11 @@ namespace MikkyShopBackEnd.Sevices
             throw new System.NotImplementedException();
         }
 
+        public void DeleteAll(int id)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public List<DrinkCategoryVM> GetAll()
         {
             var lidrcat = _context.DrinkCategories.Select(drcat => new DrinkCategoryVM
@@ -65,6 +70,11 @@ namespace MikkyShopBackEnd.Sevices
                 };
             }
             return null;
+        }
+
+        public DrinkCategoryVM GetById(int id1, int id2)
+        {
+            throw new System.NotImplementedException();
         }
 
         public List<DrinkCategoryVM> GetByNameList(string name)

@@ -17,7 +17,7 @@ namespace MikkyLibrary.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK__DrinkCat__1410FD879E73D0C7", x => x.DrinkCateID);
+                    table.PrimaryKey("PK__DrinkCat__1410FD8718663686", x => x.DrinkCateID);
                 });
 
             migrationBuilder.CreateTable(
@@ -45,7 +45,7 @@ namespace MikkyLibrary.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Drinkname = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     DrinkCateID = table.Column<int>(type: "int", nullable: false),
-                    DrinkImage = table.Column<byte[]>(type: "image", nullable: true),
+                    DrinkImage = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Price = table.Column<double>(type: "float", nullable: true)
                 },

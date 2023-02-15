@@ -51,6 +51,11 @@ namespace MikkyShopBackEnd.Sevices
             throw new System.NotImplementedException();
         }
 
+        public void DeleteAll(int id)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public List<UserVM> GetAll()
         {
             var luser = _context.Users.Select(user => new UserVM
@@ -81,6 +86,11 @@ namespace MikkyShopBackEnd.Sevices
                 };
             }
             return null;
+        }
+
+        public UserVM GetById(int id1, int id2)
+        {
+            throw new System.NotImplementedException();
         }
 
         public List<UserVM> GetByNameList(string name)

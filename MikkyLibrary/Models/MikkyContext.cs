@@ -55,8 +55,6 @@ namespace MikkyLibrary.Models
 
                 entity.Property(e => e.DrinkCateId).HasColumnName("DrinkCateID");
 
-                entity.Property(e => e.DrinkImage).HasColumnType("image");
-
                 entity.Property(e => e.Drinkname)
                     .IsRequired()
                     .HasMaxLength(50);
@@ -71,7 +69,7 @@ namespace MikkyLibrary.Models
             modelBuilder.Entity<DrinkCategory>(entity =>
             {
                 entity.HasKey(e => e.DrinkCateId)
-                    .HasName("PK__DrinkCat__1410FD879E73D0C7");
+                    .HasName("PK__DrinkCat__1410FD8718663686");
 
                 entity.ToTable("DrinkCategory");
 

@@ -12,5 +12,6 @@ namespace MikkyShopBackEnd.Sevices
         void Update(T t);
         void Delete(int id);
         void Delete(int id1, int id2);
+        void DeleteAll(int id);
     }
 }

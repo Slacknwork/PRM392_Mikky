@@ -53,6 +53,11 @@ namespace MikkyShopBackEnd.Sevices
             throw new System.NotImplementedException();
         }
 
+        public void DeleteAll(int id)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public List<DrinkVM> GetAll()
         {
             var ldri = _context.Drinks.Select(dri => new DrinkVM
@@ -83,6 +88,11 @@ namespace MikkyShopBackEnd.Sevices
                 };
             }
             return null;
+        }
+
+        public DrinkVM GetById(int id1, int id2)
+        {
+            throw new System.NotImplementedException();
         }
 
         public List<DrinkVM> GetByNameList(string name)

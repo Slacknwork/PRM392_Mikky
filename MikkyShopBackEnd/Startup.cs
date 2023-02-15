@@ -38,6 +38,9 @@ namespace MikkyShopBackEnd
                 }));
             services.AddControllers();
             services.AddScoped<IRepository<UserVM, UserM>, UserRepository>();
+            services.AddScoped<IRepository<DrinkVM,DrinkM>,DrinkRepository>();
+            services.AddScoped<IRepository<OrderVM,OrderM>, OrderRepository>();
+            services.AddScoped<IRepository<OrderDetailVM,OrderDetailM>, OrderDetailRepository>();
             services.AddScoped<IRepository<DrinkCategoryVM,DrinkCategoryM>, DrinkCategoryRepository>();
             services.AddSwaggerGen(c =>
             {

@@ -49,6 +49,27 @@ namespace MikkyShopBackEnd.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
+        [HttpGet("Uid={id}&Pwd={pws}")]
+        public IActionResult Login(int id,string pws)
+        {
+            try
+            {
+                var data = _usr.GetById(id);
+                if (data != null && data.Username == pws)
+                {
+                    return Ok(data);
+                }
+                else
+                {
+                    return NotFound();
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
         [HttpGet("Username={name}")]
         public IActionResult GetByNameList(string name)
         {

@@ -50,6 +50,11 @@ namespace MikkyShopBackEnd.Sevices
             throw new System.NotImplementedException();
         }
 
+        public void DeleteAll(int id)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public List<OrderVM> GetAll()
         {
             var lord = _context.Orders.Select(ord => new OrderVM
@@ -78,6 +83,11 @@ namespace MikkyShopBackEnd.Sevices
                 };
             }
             return null;
+        }
+
+        public OrderVM GetById(int id1, int id2)
+        {
+            throw new System.NotImplementedException();
         }
         #region Not Implemented
         public List<OrderVM> GetByNameList(string name)

@@ -10,7 +10,7 @@ using MikkyLibrary.Models;
 namespace MikkyLibrary.Migrations
 {
     [DbContext(typeof(MikkyContext))]
-    [Migration("20230214115613_DbInit")]
+    [Migration("20230215030235_DbInit")]
     partial class DbInit
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -37,8 +37,8 @@ namespace MikkyLibrary.Migrations
                         .HasColumnType("int")
                         .HasColumnName("DrinkCateID");
 
-                    b.Property<byte[]>("DrinkImage")
-                        .HasColumnType("image");
+                    b.Property<string>("DrinkImage")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Drinkname")
                         .IsRequired()
@@ -69,7 +69,7 @@ namespace MikkyLibrary.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.HasKey("DrinkCateId")
-                        .HasName("PK__DrinkCat__1410FD879E73D0C7");
+                        .HasName("PK__DrinkCat__1410FD8718663686");
 
                     b.ToTable("DrinkCategory");
                 });

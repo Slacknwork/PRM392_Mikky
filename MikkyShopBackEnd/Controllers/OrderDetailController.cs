@@ -50,12 +50,32 @@ namespace MikkyShopBackEnd.Controllers
             }
         }
 
-        [HttpGet("Ordetid={ordid}")]
-        public IActionResult GetByIdList(int ordid)
+        [HttpGet("Order/Ordetid={ordid}")]
+        public IActionResult GetByOrdIdList(int ordid)
         {
             try
             {
                 var data = _ordet.GetAll().FindAll(op => op.OrderId == ordid);
+                if (data != null)
+                {
+                    return Ok(data);
+                }
+                else
+                {
+                    return NotFound();
+                }
+            }
+            catch
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
+        [HttpGet("Drink/Drid={drid}")]
+        public IActionResult GetByDrIdList(int drid)
+        {
+            try
+            {
+                var data = _ordet.GetAll().FindAll(op => op.DrinkId == drid);
                 if (data != null)
                 {
                     return Ok(data);
@@ -109,6 +129,19 @@ namespace MikkyShopBackEnd.Controllers
             try
             {
                 _ordet.Delete(ordid,drid);
+                return Ok();
+            }
+            catch
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
+        [HttpDelete("delete/Ordid={ordid}")]
+        public IActionResult Delete(int ordid)
+        {
+            try
+            {
+                _ordet.DeleteAll(ordid);
                 return Ok();
             }
             catch
