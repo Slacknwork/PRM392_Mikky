@@ -49,13 +49,13 @@ namespace MikkyShopBackEnd.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
-        [HttpGet("Uid={id}&Pwd={pws}")]
-        public IActionResult Login(int id,string pws)
+        [HttpGet("Usrname={name}&Pwd={pws}")]
+        public IActionResult Login(string name,string pws)
         {
             try
             {
-                var data = _usr.GetById(id);
-                if (data != null && data.Username == pws)
+                var data = _usr.GetByName(name,pws);
+                if (data != null)
                 {
                     return Ok(data);
                 }

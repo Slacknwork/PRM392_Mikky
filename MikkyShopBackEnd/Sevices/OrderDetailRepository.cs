@@ -148,5 +148,9 @@ namespace MikkyShopBackEnd.Sevices
             return _context.OrderDetails.SingleOrDefault(ordet => ordet.OrderId == orderid && ordet.DrinkId == drinkid);
         }
 
+        public OrderDetailVM GetByName(string name, string pwd)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

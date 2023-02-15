@@ -95,6 +95,11 @@ namespace MikkyShopBackEnd.Sevices
             throw new System.NotImplementedException();
         }
 
+        public DrinkVM GetByName(string name, string pwd)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public List<DrinkVM> GetByNameList(string name)
         {
             var ldri = _context.Drinks.Where(dri => dri.Drinkname.Contains(name));

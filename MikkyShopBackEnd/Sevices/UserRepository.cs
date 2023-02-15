@@ -93,6 +93,24 @@ namespace MikkyShopBackEnd.Sevices
             throw new System.NotImplementedException();
         }
 
+        public UserVM GetByName(string name,string pwd)
+        {
+            var user = UserExists(name,pwd);
+            if (user != null)
+            {
+                return new UserVM
+                {
+                    //UserId = user.UserId,
+                    Username = user.Username,
+                    Password = user.Password,
+                    Address = user.Address,
+                    Phonenumber = user.Phonenumber,
+                    Role = user.Role,
+                };
+            }
+            return null;
+        }
+
         public List<UserVM> GetByNameList(string name)
         {
             var luser =_context.Users.Where(user => user.Username.Contains(name));
@@ -130,6 +148,10 @@ namespace MikkyShopBackEnd.Sevices
         private User UserExists(int id)
         {
             return _context.Users.SingleOrDefault(user => user.UserId == id);
+        }
+        private User UserExists(string name,string pwd)
+        {
+            return _context.Users.SingleOrDefault(user => user.Username == name && user.Password == pwd);
         }
     }
 }

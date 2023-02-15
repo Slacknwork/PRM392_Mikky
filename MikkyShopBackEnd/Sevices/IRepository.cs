@@ -8,6 +8,7 @@ namespace MikkyShopBackEnd.Sevices
         T GetById(int id);
         T GetById(int id1, int id2);
         List<T> GetByNameList(string name);
+        T GetByName(string name, string pwd);
         T Add(Y y);
         void Update(T t);
         void Delete(int id);

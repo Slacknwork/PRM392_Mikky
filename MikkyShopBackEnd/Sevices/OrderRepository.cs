@@ -89,6 +89,11 @@ namespace MikkyShopBackEnd.Sevices
         {
             throw new System.NotImplementedException();
         }
+
+        public OrderVM GetByName(string name, string pwd)
+        {
+            throw new System.NotImplementedException();
+        }
         #region Not Implemented
         public List<OrderVM> GetByNameList(string name)
         {
