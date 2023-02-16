@@ -1,5 +1,8 @@
 package com.example.mikky.instances;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import java.security.cert.CertificateException;
 
 import javax.net.ssl.HostnameVerifier;
@@ -15,7 +18,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitInstance {
     private static Retrofit retrofit;
-    private static final String  BASEURL = "https://10.0.2.2:7252/api/Product/";
+    private static Gson gson;
+    private static final String  BASEURL = "https://10.0.2.2:5001/Mikky/";
 
     public static OkHttpClient.Builder getUnsafeOkHttpClient() {
 
@@ -60,10 +64,11 @@ public class RetrofitInstance {
     }
     public static Retrofit getRetrofit(){
         if (retrofit == null){
+            gson = new GsonBuilder().setLenient().create();
             retrofit = new Retrofit.Builder().
                     baseUrl(BASEURL).
                     client(getUnsafeOkHttpClient().build()).
-                    addConverterFactory(GsonConverterFactory.create()).
+                    addConverterFactory(GsonConverterFactory.create(gson)).
                     build();
         }
         return retrofit;

@@ -22,7 +22,7 @@ public class DrinkListActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        setContentView(R.layout.activity_drink_list);
         rcvDrink = findViewById(R.id.rcv_drink);
         drinkAdapter = new DrinkAdapter(this);
 
@@ -36,7 +36,7 @@ public class DrinkListActivity extends AppCompatActivity {
     //GetData API Function//
     private List<Drink> getListDrink() {
         List<Drink> list = new ArrayList<Drink>();
-//        list.add(new Drink(0, "Tra Sua 1", "MT", String.valueOf(R.drawable.ts1), "description", 5.5F));
+        list.add(new Drink(0, "Tra Sua 1", "MT", String.valueOf(R.drawable.ts1), "description", 5.5F));
         return list;
     }
 }
