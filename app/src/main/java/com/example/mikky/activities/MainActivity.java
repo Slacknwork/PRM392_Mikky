@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        apiInterface = RetrofitInstance.getRetrofit().create(ApiInterface.class);
+        /*apiInterface = RetrofitInstance.getRetrofit().create(ApiInterface.class);
         apiInterface.getposts().enqueue(new Callback<List<Product>>() {
             @Override
             public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
@@ -63,6 +63,6 @@ public class MainActivity extends AppCompatActivity {
                 });
             }
 
-        });
+        });*/
     }
 }

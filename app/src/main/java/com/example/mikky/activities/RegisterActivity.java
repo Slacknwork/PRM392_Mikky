@@ -13,12 +13,20 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.mikky.R;
+import com.example.mikky.instances.RetrofitInstance;
+import com.example.mikky.models.User;
+import com.example.mikky.services.AccessInterface;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class RegisterActivity extends AppCompatActivity {
     private EditText username,password,address,phone;
     private TextView banner;
     private Button register;
     private ProgressBar progressBar;
+    private AccessInterface accessInterface;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,10 +55,39 @@ public class RegisterActivity extends AppCompatActivity {
                 String ar = address.getText().toString();
                 String p = phone.getText().toString();
                 if ((TextUtils.isEmpty(userName) && TextUtils.isEmpty(pw)) || pw.length() < 6 ){
-                    Toast.makeText(RegisterActivity.this,"Please enter...",Toast.LENGTH_SHORT).show();
+                    progressBar.setVisibility(View.GONE);
+                    Toast.makeText(RegisterActivity.this,"Please enter matching requirement!",Toast.LENGTH_SHORT).show();
                 }else {
-
+                    User user = new User();
+                    user.setUsername(userName);
+                    user.setPassword(pw);
+                    user.setAddress(ar);
+                    user.setPhonenumber(Integer.parseInt(p));
+                    user.setRole(0);
+                    register(user);
                 }
+            }
+        });
+    }
+    private void register(User user){
+        accessInterface = RetrofitInstance.getRetrofit().create(AccessInterface.class);
+        accessInterface.createUser(user).enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                progressBar.setVisibility(View.GONE);
+                if (response.body() != null){
+                    Toast.makeText(RegisterActivity.this,"Success create an account!",Toast.LENGTH_SHORT).show();
+                    Intent i = new Intent(RegisterActivity.this,LoginActivity.class);
+                    startActivity(i);
+                }else{
+                    Toast.makeText(RegisterActivity.this,"Account already exits!",Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                progressBar.setVisibility(View.GONE);
+                Toast.makeText(RegisterActivity.this,t.getMessage(),Toast.LENGTH_SHORT).show();
             }
         });
     }
