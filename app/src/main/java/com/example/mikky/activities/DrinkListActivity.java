@@ -5,6 +5,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 import com.example.mikky.R;
 import com.example.mikky.adapter.Drink;
@@ -22,6 +24,8 @@ public class DrinkListActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_drink_list);
+
 
         rcvDrink = findViewById(R.id.rcv_drink);
         drinkAdapter = new DrinkAdapter(this);
@@ -30,13 +34,22 @@ public class DrinkListActivity extends AppCompatActivity {
         rcvDrink.setLayoutManager(linearLayoutManager);
 
         drinkAdapter.setDrinkData(getListDrink());
-
+        rcvDrink.setAdapter(drinkAdapter);
     }
 
     //GetData API Function//
     private List<Drink> getListDrink() {
-        List<Drink> list = new ArrayList<Drink>();
-//        list.add(new Drink(0, "Tra Sua 1", "MT", String.valueOf(R.drawable.ts1), "description", 5.5F));
+        List<Drink> list = new ArrayList<>();
+        list.add(new Drink(R.drawable.ts1,"Tra Sua 1", 25000f));
+        list.add(new Drink(R.drawable.ts2,"Tra Sua 2", 30000f));
+        list.add(new Drink(R.drawable.ts3,"Tra Sua 3", 15000f));
+        list.add(new Drink(R.drawable.st4,"Sinh to 4", 25000f));
+        list.add(new Drink(R.drawable.st5,"Sinh to 5", 35000f));
+        list.add(new Drink(R.drawable.st6,"Sinh to 6", 15000f));
+        list.add(new Drink(R.drawable.t7,"Tra 7", 15000f));
+        list.add(new Drink(R.drawable.t8,"Tra 8", 15000f));
         return list;
     }
+
+
 }

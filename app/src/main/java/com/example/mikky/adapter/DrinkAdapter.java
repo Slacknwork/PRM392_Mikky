@@ -45,7 +45,7 @@ public class DrinkAdapter extends RecyclerView.Adapter<DrinkAdapter.DrinkViewHol
         }
         holder.item_img.setImageResource(drink.getDrinkId());
         holder.item_name.setText(drink.getDrinkName());
-        holder.item_price.setText(String.valueOf(drink.getPrice()));
+        holder.item_price.setText(String.valueOf(drink.getPrice()) + " đồng");
     }
 
     @Override
