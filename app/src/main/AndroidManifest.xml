@@ -34,7 +34,10 @@
         <activity
             android:name=".activities.DrinkListActivity"
             android:exported="true">
-
+        </activity>
+        <activity
+            android:name=".activities.DetailActivity"
+            android:exported="true">
         </activity>
     </application>
 
