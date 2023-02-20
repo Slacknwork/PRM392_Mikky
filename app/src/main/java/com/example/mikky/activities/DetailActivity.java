@@ -40,14 +40,16 @@ public class DetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_drink_detail);
         mapping();
 //        back();
-        getApi(1);
+        getApi();
     }
 
-    private void getApi(int drinkId){
+    private void getApi(){
+        int drinkId = (int) getIntent().getIntExtra("putIdToDetail",0);
         apiInterface = RetrofitInstance.getRetrofit().create(ApiInterface.class);
         apiInterface.getItem(drinkId).enqueue(new Callback<Drink>() {
             @Override
             public void onResponse(Call<Drink> call, Response<Drink> response) {
+                Toast.makeText(DetailActivity.this,"testDrinkId:"+drinkId,Toast.LENGTH_SHORT).show();
                 if (response.isSuccessful()){
                     Drink drink = response.body();
                     if (drink != null){
@@ -69,31 +71,14 @@ public class DetailActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<Drink> call, Throwable t) {
                 Toast.makeText(DetailActivity.this,t.getMessage(),Toast.LENGTH_SHORT).show();
-                loadDetail();
             }
         });
-    }
-
-    private void loadDetail() {
-        int id = 1;
-        String name = "tra sua";
-        int cateId =1;
-        String img = "https://pos.cafeongbau.com:4433/images/list/tra_sua_tran_chau.png";
-        String description = "aaaaaa";
-        int price = 25000;
-        int amount = 1;
-
-        txtName.setText(name);
-        DecimalFormat df = new DecimalFormat("###,###,###");
-        txtPrice.setText(df.format(price)+"đ");
-        txtDescription.setText(description);
-        Picasso.get().load(img).placeholder(R.drawable.noimage).error(R.drawable.error).into(imageDetail);
     }
 
     private void back() {
         setSupportActionBar(toolbarDetail);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toolbarDetail.setNavigationOnClickListener(new View.OnClickListener(){
+        toolbarDetail.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();

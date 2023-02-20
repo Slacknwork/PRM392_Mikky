@@ -5,21 +5,27 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.mikky.R;
-import com.example.mikky.adapter.Drink;
+import com.example.mikky.models.Drink;
 import com.example.mikky.adapter.DrinkAdapter;
+import com.example.mikky.instances.RetrofitInstance;
+import com.example.mikky.services.ApiInterface;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class DrinkListActivity extends AppCompatActivity {
 
     private RecyclerView rcvDrink;
     private DrinkAdapter drinkAdapter;
+    private ApiInterface apiInterface;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,16 +44,34 @@ public class DrinkListActivity extends AppCompatActivity {
 
     //GetData API Function//
     private List<Drink> getListDrink() {
-
         List<Drink> list = new ArrayList<>();
-        list.add(new Drink(R.drawable.ts1,"Tra Sua 1", 25000f));
-        list.add(new Drink(R.drawable.ts2,"Tra Sua 2", 30000f));
-        list.add(new Drink(R.drawable.ts3,"Tra Sua 3", 15000f));
-        list.add(new Drink(R.drawable.st4,"Sinh to 4", 25000f));
-        list.add(new Drink(R.drawable.st5,"Sinh to 5", 35000f));
-        list.add(new Drink(R.drawable.st6,"Sinh to 6", 15000f));
-        list.add(new Drink(R.drawable.t7,"Tra 7", 15000f));
-        list.add(new Drink(R.drawable.t8,"Tra 8", 15000f));        
+        apiInterface = RetrofitInstance.getRetrofit().create(ApiInterface.class);
+        apiInterface.getListDrink().enqueue(new Callback<List<com.example.mikky.models.Drink>>() {
+            @Override
+            public void onResponse(Call<List<Drink>> call, Response<List<Drink>> response) {
+                if (response.isSuccessful()){
+
+                    if (response.body() != null){
+                        Toast.makeText(DrinkListActivity.this,"Successfully!",Toast.LENGTH_SHORT).show();
+                        for( Drink d : response.body()){
+                            list.add(d);
+                        }
+                    }else{
+                        Toast.makeText(DrinkListActivity.this,"Fail!",Toast.LENGTH_SHORT).show();
+                    }
+                }else{
+                    Toast.makeText(DrinkListActivity.this,"Connect fail!",Toast.LENGTH_SHORT).show();
+                }
+            }
+            @Override
+            public void onFailure(Call<List<Drink>> call, Throwable t) {
+                Toast.makeText(DrinkListActivity.this,t.getMessage(),Toast.LENGTH_SHORT).show();
+            }
+        });
+
+//        List<Drink> list = new ArrayList<>();
+//        list.add(new Drink(1,"Tra Sua 1",1,"","", 25000f));
+//        list.add(new Drink(2,"Tra Sua 2",2,"","", 30000f));
 
         return list;
     }

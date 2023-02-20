@@ -67,7 +67,7 @@ public class LoginActivity extends AppCompatActivity {
                 if (response.isSuccessful()){
                     if (response.body() != null){
                         Toast.makeText(LoginActivity.this,"Login successfully!",Toast.LENGTH_SHORT).show();
-                        Intent i = new Intent(LoginActivity.this,MainActivity.class);
+                        Intent i = new Intent(LoginActivity.this,DrinkListActivity.class);
                         startActivity(i);
                     }else{
                         Toast.makeText(LoginActivity.this,"Wrong Username/Password!",Toast.LENGTH_SHORT).show();
