@@ -14,14 +14,18 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.mikky.R;
 import com.example.mikky.activities.DetailActivity;
 import com.example.mikky.models.Drink;
+import com.squareup.picasso.Picasso;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 public class DrinkAdapter extends RecyclerView.Adapter<DrinkAdapter.DrinkViewHolder>{
 
     private Context mContext;
     private List<Drink> mlist;
-
+    private Drink [] listImg;
+    ImageView imageDetail;
+    String img;
     public DrinkAdapter(Context mContext) {
         this.mContext = mContext;
     }
@@ -45,9 +49,11 @@ public class DrinkAdapter extends RecyclerView.Adapter<DrinkAdapter.DrinkViewHol
         if (drink == null){
             return;
         }
-        holder.item_img.setImageResource(drink.getId());
+        img = drink.getDrinkImage();
         holder.item_name.setText(drink.getDrinkname());
-        holder.item_price.setText(String.valueOf(drink.getPrice()) + " đồng");
+        DecimalFormat df = new DecimalFormat("###,###,###");
+        holder.item_price.setText(df.format((int) drink.getPrice()) + " đồng");
+        Picasso.get().load(img).placeholder(R.drawable.noimage).error(R.drawable.error).into(holder.item_img);
     }
 
     @Override
@@ -73,7 +79,7 @@ public class DrinkAdapter extends RecyclerView.Adapter<DrinkAdapter.DrinkViewHol
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(mContext, DetailActivity.class);
-                    intent.putExtra("putIdToDetail", mlist.get(getAdapterPosition()).getId());
+                    intent.putExtra("putIdToDetail", mlist.get(getAdapterPosition()).getDrinkId());
                     mContext.startActivity(intent);
                 }
             });
