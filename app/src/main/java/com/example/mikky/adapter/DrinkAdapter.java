@@ -1,6 +1,7 @@
 package com.example.mikky.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mikky.R;
-import com.example.mikky.activities.DrinkListActivity;
+import com.example.mikky.activities.DetailActivity;
+import com.example.mikky.models.Drink;
 
 import java.util.List;
 
@@ -43,8 +45,8 @@ public class DrinkAdapter extends RecyclerView.Adapter<DrinkAdapter.DrinkViewHol
         if (drink == null){
             return;
         }
-        holder.item_img.setImageResource(drink.getDrinkId());
-        holder.item_name.setText(drink.getDrinkName());
+        holder.item_img.setImageResource(drink.getId());
+        holder.item_name.setText(drink.getDrinkname());
         holder.item_price.setText(String.valueOf(drink.getPrice()) + " đồng");
     }
 
@@ -67,6 +69,14 @@ public class DrinkAdapter extends RecyclerView.Adapter<DrinkAdapter.DrinkViewHol
             item_img = itemView.findViewById(R.id.drink_img);
             item_name = itemView.findViewById(R.id.drink_name);
             item_price = itemView.findViewById(R.id.drink_price);
+            itemView.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(mContext, DetailActivity.class);
+                    intent.putExtra("putIdToDetail", mlist.get(getAdapterPosition()).getId());
+                    mContext.startActivity(intent);
+                }
+            });
         }
     }
 
