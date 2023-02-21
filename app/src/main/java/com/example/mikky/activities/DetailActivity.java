@@ -31,6 +31,7 @@ public class DetailActivity extends AppCompatActivity {
     TextView txtName, txtPrice, txtDescription;
     EditText editTxtAmount;
     Button btnMinus, btnPlus, btnAddCart;
+    int amount = 0;
 
     private ApiInterface apiInterface;
 
@@ -38,9 +39,28 @@ public class DetailActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_drink_detail);
+        btnMinus = (Button) findViewById(R.id.btnMinus);
+        btnMinus = (Button) findViewById(R.id.btnPlus);
+        editTxtAmount = findViewById(R.id.editTxtAmount);
         mapping();
 //        back();
         getApi();
+        btnMinus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                amount = Integer.parseInt(editTxtAmount.getText().toString());
+                if (amount > 0) amount--;
+                editTxtAmount.setText(String.valueOf(amount));
+            }
+        });
+        btnPlus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                amount = Integer.parseInt(editTxtAmount.getText().toString());
+                amount++;
+                editTxtAmount.setText(String.valueOf(amount));
+            }
+        });
     }
 
     private void getApi(){
@@ -59,7 +79,7 @@ public class DetailActivity extends AppCompatActivity {
                         DecimalFormat df = new DecimalFormat("###,###,###");
                         txtPrice.setText(df.format((int) drink.getPrice())+"đ");
                         txtDescription.setText(drink.getDescription());
-                        String img = drink.getImage();
+                        String img = drink.getDrinkImage();
                         Picasso.get().load(img).placeholder(R.drawable.noimage).error(R.drawable.error).into(imageDetail);
                     }else{
                         Toast.makeText(DetailActivity.this,"Fail!",Toast.LENGTH_SHORT).show();

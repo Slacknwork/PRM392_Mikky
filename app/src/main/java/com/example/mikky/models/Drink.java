@@ -3,55 +3,55 @@ package com.example.mikky.models;
 import java.io.Serializable;
 
 public class Drink implements Serializable {
-    private int id;
+    private int drinkId;
     private String drinkname;
-    private int cateId;
-    private String image;
+    private int drinkCateId;
+    private String drinkImage;
     private String description;
     private double price;
 
     public Drink(){
     }
 
-    public Drink(int id, String name, int cateId, String image, String description, double price) {
-        this.id = id;
-        this.drinkname = name;
-        this.cateId = cateId;
-        this.image = image;
+    public Drink(int drinkId, String drinkname, int drinkCateId, String drinkImage, String description, double price) {
+        this.drinkId = drinkId;
+        this.drinkname = drinkname;
+        this.drinkCateId = drinkCateId;
+        this.drinkImage = drinkImage;
         this.description = description;
         this.price = price;
     }
 
-    public int getId() {
-        return id;
+    public int getDrinkId() {
+        return drinkId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setDrinkId(int drinkId) {
+        this.drinkId = drinkId;
     }
 
     public String getDrinkname() {
         return drinkname;
     }
 
-    public void setDrinkname(String name) {
-        this.drinkname = name;
+    public void setDrinkname(String drinkname) {
+        this.drinkname = drinkname;
     }
 
-    public int getCateId() {
-        return cateId;
+    public int getDrinkCateId() {
+        return drinkCateId;
     }
 
-    public void setCateId(int cateId) {
-        this.cateId = cateId;
+    public void setDrinkCateId(int drinkCateId) {
+        this.drinkCateId = drinkCateId;
     }
 
-    public String getImage() {
-        return image;
+    public String getDrinkImage() {
+        return drinkImage;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setDrinkImage(String drinkImage) {
+        this.drinkImage = drinkImage;
     }
 
     public String getDescription() {

@@ -26,7 +26,7 @@ public class DrinkListActivity extends AppCompatActivity {
     private RecyclerView rcvDrink;
     private DrinkAdapter drinkAdapter;
     private ApiInterface apiInterface;
-
+    private List<Drink> listDrink = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,8 +38,10 @@ public class DrinkListActivity extends AppCompatActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
         rcvDrink.setLayoutManager(linearLayoutManager);
 
-        drinkAdapter.setDrinkData(getListDrink());
+        listDrink = getListDrink();
+        drinkAdapter.setDrinkData(listDrink);
         rcvDrink.setAdapter(drinkAdapter);
+
     }
 
     //GetData API Function//
@@ -56,6 +58,8 @@ public class DrinkListActivity extends AppCompatActivity {
                         for( Drink d : response.body()){
                             list.add(d);
                         }
+                        drinkAdapter.notifyDataSetChanged();
+
                     }else{
                         Toast.makeText(DrinkListActivity.this,"Fail!",Toast.LENGTH_SHORT).show();
                     }
@@ -72,7 +76,6 @@ public class DrinkListActivity extends AppCompatActivity {
 //        List<Drink> list = new ArrayList<>();
 //        list.add(new Drink(1,"Tra Sua 1",1,"","", 25000f));
 //        list.add(new Drink(2,"Tra Sua 2",2,"","", 30000f));
-
         return list;
     }
 
