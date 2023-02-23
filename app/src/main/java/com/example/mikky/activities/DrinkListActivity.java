@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.Menu;
 import android.widget.Toast;
 
 import com.example.mikky.R;
@@ -42,6 +43,12 @@ public class DrinkListActivity extends AppCompatActivity {
         drinkAdapter.setDrinkData(listDrink);
         rcvDrink.setAdapter(drinkAdapter);
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.detail_menu,menu);
+        return super.onCreateOptionsMenu(menu);
     }
 
     //GetData API Function//

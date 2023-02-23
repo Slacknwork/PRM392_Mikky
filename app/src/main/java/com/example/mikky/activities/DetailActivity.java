@@ -2,6 +2,7 @@ package com.example.mikky.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -43,7 +44,7 @@ public class DetailActivity extends AppCompatActivity {
         btnMinus = (Button) findViewById(R.id.btnPlus);
         editTxtAmount = findViewById(R.id.editTxtAmount);
         mapping();
-//        back();
+        back();
         getApi();
         btnMinus.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,13 +64,19 @@ public class DetailActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.detail_menu,menu);
+        return super.onCreateOptionsMenu(menu);
+
+    }
+
     private void getApi(){
         int drinkId = (int) getIntent().getIntExtra("putIdToDetail",0);
         apiInterface = RetrofitInstance.getRetrofit().create(ApiInterface.class);
         apiInterface.getItem(drinkId).enqueue(new Callback<Drink>() {
             @Override
             public void onResponse(Call<Drink> call, Response<Drink> response) {
-                Toast.makeText(DetailActivity.this,"testDrinkId:"+drinkId,Toast.LENGTH_SHORT).show();
                 if (response.isSuccessful()){
                     Drink drink = response.body();
                     if (drink != null){
@@ -97,7 +104,6 @@ public class DetailActivity extends AppCompatActivity {
 
     private void back() {
         setSupportActionBar(toolbarDetail);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbarDetail.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
