@@ -1,13 +1,21 @@
 package com.example.mikky.activities;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.widget.Toolbar;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -31,10 +39,12 @@ public class DetailActivity extends AppCompatActivity {
     TextView txtName, txtPrice, txtDescription;
     EditText editTxtAmount;
     Button btnMinus, btnPlus, btnAddCart;
-    int amount = 0;
+    private Toolbar toolbar;
+    int quantity = 0;
 
     private ApiInterface apiInterface;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,29 +52,70 @@ public class DetailActivity extends AppCompatActivity {
         btnMinus = (Button) findViewById(R.id.btnMinus);
         btnMinus = (Button) findViewById(R.id.btnPlus);
         editTxtAmount = findViewById(R.id.editTxtAmount);
+        toolbar =(Toolbar) findViewById(R.id.toolbar);
+        int drinkId = (int) getIntent().getIntExtra("putIdToDetail",0);
+        int price = (int)getIntent().getIntExtra("Price",0);
+        quantity = Integer.parseInt(editTxtAmount.getText().toString());
         mapping();
 //        back();
-        getApi();
+        getApi(drinkId);
         btnMinus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                amount = Integer.parseInt(editTxtAmount.getText().toString());
-                if (amount > 0) amount--;
-                editTxtAmount.setText(String.valueOf(amount));
+
+                if (quantity > 0) quantity--;
+                editTxtAmount.setText(String.valueOf(quantity));
             }
         });
         btnPlus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                amount = Integer.parseInt(editTxtAmount.getText().toString());
-                amount++;
-                editTxtAmount.setText(String.valueOf(amount));
+
+                quantity++;
+                editTxtAmount.setText(String.valueOf(quantity));
             }
         });
+        btnAddCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences sharedPreferences = getSharedPreferences("Cart",MODE_PRIVATE);
+                SharedPreferences.Editor edit = sharedPreferences.edit();
+                int currentQuantity = sharedPreferences.getInt("Quantity"+drinkId, 0);
+                int cartQuantity = quantity + currentQuantity;
+                edit.putInt("DrinkId"+drinkId, drinkId);
+                edit.putInt("Quantity"+drinkId, cartQuantity);
+                edit.putFloat("Price"+drinkId, price);
+                edit.commit();
+                Toast.makeText(DetailActivity.this,"Add to Cart",Toast.LENGTH_SHORT).show();
+            }
+        });
+        setSupportActionBar(toolbar);
     }
 
-    private void getApi(){
-        int drinkId = (int) getIntent().getIntExtra("putIdToDetail",0);
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menu,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.Cart:
+                Intent intentCart = new Intent(DetailActivity.this, CartActivity.class);
+                startActivity(intentCart);
+                break;
+            case R.id.logout:
+                Intent intentLogout = new Intent(DetailActivity.this, LoginActivity.class);
+                startActivity(intentLogout);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void getApi(int drinkId){
+        //int drinkId = (int) getIntent().getIntExtra("putIdToDetail",0);
         apiInterface = RetrofitInstance.getRetrofit().create(ApiInterface.class);
         apiInterface.getItem(drinkId).enqueue(new Callback<Drink>() {
             @Override
@@ -107,7 +158,7 @@ public class DetailActivity extends AppCompatActivity {
     }
 
     private void mapping() {
-        toolbarDetail = (Toolbar) findViewById(R.id.toolbarDetail);
+        //toolbarDetail = (Toolbar) findViewById(R.id.toolbarDetail);
         imageDetail = (ImageView) findViewById(R.id.imgDetail);
         txtName = (TextView) findViewById(R.id.txtName);
         txtPrice = (TextView) findViewById(R.id.txtPrice);

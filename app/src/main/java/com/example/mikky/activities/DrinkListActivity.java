@@ -1,11 +1,20 @@
 package com.example.mikky.activities;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.Toast;
+import androidx.appcompat.widget.Toolbar;
+
 
 import com.example.mikky.R;
 import com.example.mikky.models.Drink;
@@ -27,6 +36,8 @@ public class DrinkListActivity extends AppCompatActivity {
     private DrinkAdapter drinkAdapter;
     private ApiInterface apiInterface;
     private List<Drink> listDrink = new ArrayList<>();
+    private Toolbar toolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +45,7 @@ public class DrinkListActivity extends AppCompatActivity {
 
         rcvDrink = findViewById(R.id.rcv_drink);
         drinkAdapter = new DrinkAdapter(this);
+        toolbar =(Toolbar) findViewById(R.id.toolbar);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
         rcvDrink.setLayoutManager(linearLayoutManager);
@@ -42,6 +54,35 @@ public class DrinkListActivity extends AppCompatActivity {
         drinkAdapter.setDrinkData(listDrink);
         rcvDrink.setAdapter(drinkAdapter);
 
+        SharedPreferences sh = getSharedPreferences("User", Context.MODE_PRIVATE);
+        if (sh.getInt("ID",0) !=0){
+            Toast.makeText(DrinkListActivity.this,sh.getInt("ID",0),Toast.LENGTH_SHORT).show();
+        }
+
+        setSupportActionBar(toolbar);
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menu,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.Cart:
+                Intent intentCart = new Intent(DrinkListActivity.this, CartActivity.class);
+                startActivity(intentCart);
+                break;
+            case R.id.logout:
+                Intent intentLogout = new Intent(DrinkListActivity.this, LoginActivity.class);
+                startActivity(intentLogout);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     //GetData API Function//
