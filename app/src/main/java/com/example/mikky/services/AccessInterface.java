@@ -16,7 +16,7 @@ public interface AccessInterface {
     @GET("User")
     Call<List<User>> getALLUser();
     @GET("User/Usrname={username}&Pwd={password}")
-    Call<User> getUser(@Path(value = "username", encoded = true)String username, @Path(value = "password", encoded = true)String password);
+    Call<User> getUser(@Path(value = "username")String username, @Path(value = "password")String password);
     @POST("User/create")
     Call<User> createUser(@Body User user);
 }

@@ -12,5 +12,5 @@ public interface ApiInterface {
     @GET("Drink")
     Call<List<Drink>> getListDrink();
     @GET("Drink/Drid={id}")
-    Call<Drink> getItem(@Path(value = "id", encoded = true)int id);
+    Call<Drink> getItem(@Path(value = "id")int id);
 }

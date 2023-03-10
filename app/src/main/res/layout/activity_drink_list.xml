@@ -4,7 +4,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     android:orientation="vertical"
+
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
     tools:context=".activities.DrinkListActivity">
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbarHome"
@@ -16,14 +20,18 @@
 
     </androidx.appcompat.widget.Toolbar>
 
+    <include layout="@layout/appbar">
+
+    </include>
+
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcv_drink"
         android:layout_marginTop="55dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
         android:layout_marginStart="10dp"
-        android:layout_marginBottom="10dp" />
-
-
+        android:layout_marginTop="60dp" />
 
 </RelativeLayout>
