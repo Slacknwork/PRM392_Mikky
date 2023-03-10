@@ -5,8 +5,10 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
+
 import android.view.MenuInflater;
 import android.view.MenuItem;
+
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -57,8 +59,10 @@ public class DetailActivity extends AppCompatActivity {
         int price = (int)getIntent().getIntExtra("Price",0);
         quantity = Integer.parseInt(editTxtAmount.getText().toString());
         mapping();
-//        back();
-        getApi(drinkId);
+
+        back();
+        getApi();
+
         btnMinus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -94,33 +98,16 @@ public class DetailActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.menu,menu);
-        return true;
+        getMenuInflater().inflate(R.menu.detail_menu,menu);
+        return super.onCreateOptionsMenu(menu);
     }
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
-            case R.id.Cart:
-                Intent intentCart = new Intent(DetailActivity.this, CartActivity.class);
-                startActivity(intentCart);
-                break;
-            case R.id.logout:
-                Intent intentLogout = new Intent(DetailActivity.this, LoginActivity.class);
-                startActivity(intentLogout);
-                break;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    private void getApi(int drinkId){
-        //int drinkId = (int) getIntent().getIntExtra("putIdToDetail",0);
+    private void getApi(){
+        int drinkId = (int) getIntent().getIntExtra("putIdToDetail",0);
         apiInterface = RetrofitInstance.getRetrofit().create(ApiInterface.class);
         apiInterface.getItem(drinkId).enqueue(new Callback<Drink>() {
             @Override
             public void onResponse(Call<Drink> call, Response<Drink> response) {
-                Toast.makeText(DetailActivity.this,"testDrinkId:"+drinkId,Toast.LENGTH_SHORT).show();
                 if (response.isSuccessful()){
                     Drink drink = response.body();
                     if (drink != null){
@@ -148,7 +135,6 @@ public class DetailActivity extends AppCompatActivity {
 
     private void back() {
         setSupportActionBar(toolbarDetail);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbarDetail.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

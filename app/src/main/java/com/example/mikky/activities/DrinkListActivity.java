@@ -10,8 +10,11 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
+
+
 import android.view.MenuInflater;
 import android.view.MenuItem;
+
 import android.widget.Toast;
 import androidx.appcompat.widget.Toolbar;
 
@@ -83,6 +86,12 @@ public class DrinkListActivity extends AppCompatActivity {
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.detail_menu,menu);
+        return super.onCreateOptionsMenu(menu);
     }
 
     //GetData API Function//
