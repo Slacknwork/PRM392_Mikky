@@ -57,30 +57,18 @@ public class DrinkListActivity extends AppCompatActivity {
         drinkAdapter.setDrinkData(listDrink);
         rcvDrink.setAdapter(drinkAdapter);
 
-        SharedPreferences sh = getSharedPreferences("User", Context.MODE_PRIVATE);
-        if (sh.getInt("ID",0) !=0){
-            Toast.makeText(DrinkListActivity.this,sh.getInt("ID",0),Toast.LENGTH_SHORT).show();
-        }
-
         setSupportActionBar(toolbar);
 
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.menu,menu);
-        return true;
-    }
-
-    @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
-            case R.id.Cart:
+            case R.id.cart:
                 Intent intentCart = new Intent(DrinkListActivity.this, CartActivity.class);
                 startActivity(intentCart);
                 break;
-            case R.id.logout:
+            case R.id.exit:
                 Intent intentLogout = new Intent(DrinkListActivity.this, LoginActivity.class);
                 startActivity(intentLogout);
                 break;
@@ -104,7 +92,6 @@ public class DrinkListActivity extends AppCompatActivity {
                 if (response.isSuccessful()){
 
                     if (response.body() != null){
-                        Toast.makeText(DrinkListActivity.this,"Successfully!",Toast.LENGTH_SHORT).show();
                         for( Drink d : response.body()){
                             list.add(d);
                         }
@@ -122,10 +109,6 @@ public class DrinkListActivity extends AppCompatActivity {
                 Toast.makeText(DrinkListActivity.this,t.getMessage(),Toast.LENGTH_SHORT).show();
             }
         });
-
-//        List<Drink> list = new ArrayList<>();
-//        list.add(new Drink(1,"Tra Sua 1",1,"","", 25000f));
-//        list.add(new Drink(2,"Tra Sua 2",2,"","", 30000f));
         return list;
     }
 

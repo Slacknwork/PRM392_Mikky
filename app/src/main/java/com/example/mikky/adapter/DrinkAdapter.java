@@ -80,7 +80,6 @@ public class DrinkAdapter extends RecyclerView.Adapter<DrinkAdapter.DrinkViewHol
                 public void onClick(View v) {
                     Intent intent = new Intent(mContext, DetailActivity.class);
                     intent.putExtra("putIdToDetail", mlist.get(getAdapterPosition()).getDrinkId());
-                    intent.putExtra("Price", mlist.get(getAdapterPosition()).getPrice());
                     mContext.startActivity(intent);
                 }
             });

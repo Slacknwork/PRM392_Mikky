@@ -8,7 +8,7 @@
         android:title="Setting">
         <menu>
             <item
-                android:id="@+id/Cart"
+                android:id="@+id/notcart"
                 android:title="Cart" />
             <item
                 android:id="@+id/logout"
