@@ -64,7 +64,8 @@ public class RetrofitInstance {
     }
     public static Retrofit getRetrofit(){
         if (retrofit == null){
-            gson = new GsonBuilder().setLenient().create();
+            gson = new GsonBuilder().setLenient().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
+
             retrofit = new Retrofit.Builder().
                     baseUrl(BASEURL).
                     client(getUnsafeOkHttpClient().build()).

@@ -43,10 +43,11 @@ public class DetailActivity extends AppCompatActivity {
     Button btnMinus, btnPlus, btnAddCart;
     private Toolbar toolbar;
     int quantity = 0;
+    double price;
+    String img,name;
 
     private ApiInterface apiInterface;
 
-    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,11 +57,10 @@ public class DetailActivity extends AppCompatActivity {
         editTxtAmount = findViewById(R.id.editTxtAmount);
         toolbar =(Toolbar) findViewById(R.id.toolbar);
         int drinkId = (int) getIntent().getIntExtra("putIdToDetail",0);
-        int price = (int)getIntent().getIntExtra("Price",0);
         quantity = Integer.parseInt(editTxtAmount.getText().toString());
         mapping();
 
-        back();
+        //back();
         getApi();
 
         btnMinus.setOnClickListener(new View.OnClickListener() {
@@ -82,24 +82,47 @@ public class DetailActivity extends AppCompatActivity {
         btnAddCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SharedPreferences sharedPreferences = getSharedPreferences("Cart",MODE_PRIVATE);
-                SharedPreferences.Editor edit = sharedPreferences.edit();
-                int currentQuantity = sharedPreferences.getInt("Quantity"+drinkId, 0);
-                int cartQuantity = quantity + currentQuantity;
-                edit.putInt("DrinkId"+drinkId, drinkId);
-                edit.putInt("Quantity"+drinkId, cartQuantity);
-                edit.putFloat("Price"+drinkId, price);
-                edit.commit();
-                Toast.makeText(DetailActivity.this,"Add to Cart",Toast.LENGTH_SHORT).show();
+                if (quantity !=0) {
+                    SharedPreferences sharedPreferences = getSharedPreferences("Cart", MODE_PRIVATE);
+                    SharedPreferences.Editor edit = sharedPreferences.edit();
+                    int currentQuantity = sharedPreferences.getInt("Quantity" + drinkId, 0);
+                    int cartQuantity = quantity + currentQuantity;
+                    edit.putInt("DrinkId" + drinkId, drinkId);
+                    edit.putInt("Quantity" + drinkId, cartQuantity);
+                    edit.putFloat("Price" + drinkId, (float) price);
+                    edit.putString("Name"+drinkId,name);
+                    edit.putString("Image"+drinkId,img);
+                    edit.commit();
+                    Toast.makeText(DetailActivity.this, "Add to Cart", Toast.LENGTH_SHORT).show();
+                }
             }
         });
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.detail_menu,menu);
         return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.cart:
+                Intent intentCart = new Intent(DetailActivity.this, CartActivity.class);
+                startActivity(intentCart);
+                break;
+            case R.id.exit:
+                Intent intentLogout = new Intent(DetailActivity.this, LoginActivity.class);
+                startActivity(intentLogout);
+                break;
+            case android.R.id.home:
+                finish();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void getApi(){
@@ -111,13 +134,13 @@ public class DetailActivity extends AppCompatActivity {
                 if (response.isSuccessful()){
                     Drink drink = response.body();
                     if (drink != null){
-                        Toast.makeText(DetailActivity.this,"Successfully!",Toast.LENGTH_SHORT).show();
-
+                        name = drink.getDrinkname();
                         txtName.setText(drink.getDrinkname());
                         DecimalFormat df = new DecimalFormat("###,###,###");
+                        price = drink.getPrice();
                         txtPrice.setText(df.format((int) drink.getPrice())+"đ");
                         txtDescription.setText(drink.getDescription());
-                        String img = drink.getDrinkImage();
+                        img = drink.getDrinkImage();
                         Picasso.get().load(img).placeholder(R.drawable.noimage).error(R.drawable.error).into(imageDetail);
                     }else{
                         Toast.makeText(DetailActivity.this,"Fail!",Toast.LENGTH_SHORT).show();

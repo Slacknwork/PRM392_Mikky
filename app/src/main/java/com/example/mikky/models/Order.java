@@ -1,18 +1,19 @@
 package com.example.mikky.models;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class Order implements Serializable {
     private int orderId;
     private int userId;
-    private String date;
+    private Date date;
     private String status;
     private float totalPrice;
 
     public Order() {
     }
 
-    public Order(int orderId, int userId, String date, String status, float totalPrice) {
+    public Order(int orderId, int userId, Date date, String status, float totalPrice) {
         this.orderId = orderId;
         this.userId = userId;
         this.date = date;
@@ -36,11 +37,11 @@ public class Order implements Serializable {
         this.userId = userId;
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
@@ -56,7 +57,7 @@ public class Order implements Serializable {
         return totalPrice;
     }
 
-    public void setTotalPrice(float totalPrice) {
+    public void setTotalPrice(Float totalPrice) {
         this.totalPrice = totalPrice;
     }
 }
