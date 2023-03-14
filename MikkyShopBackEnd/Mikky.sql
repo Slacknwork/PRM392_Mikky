@@ -48,5 +48,6 @@ CREATE TABLE [dbo].[OrderDetail](
 	DrinkID int NOT NULL FOREIGN KEY REFERENCES Drink(DrinkID),
 	Quantity int,
 	Price float,
+	PRIMARY KEY (OrderID,DrinkID)
 )
 

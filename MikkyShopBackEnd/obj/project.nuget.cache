@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "smwaR0lUR88EkXjyBvFWYF1doU8WEC/M0Td/NzZC+FRKZBHxg2Mzfiqt9RDjlHRe/d3ZvknnE8bNOK564wYdJw==",
+  "dgSpecHash": "jwgW8v8hk+7p0QK10iZh/xotVupWMRCaLbVcXpfpHMLOSzGiklwrJA7qtQeUNMO/+X8fNu76HCjKXF4i74W48A==",
   "success": true,
-  "projectFilePath": "D:\\VisualStudioCommunityProjects\\MikkyShopManagement\\MikkyShopBackEnd\\MikkyShopBackEnd.csproj",
+  "projectFilePath": "D:\\VisualStudioCommunityProjects\\MikkyShopAPIBox\\MikkyShopBackEnd\\MikkyShopBackEnd.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ADMIN\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\ADMIN\\.nuget\\packages\\jetbrains.annotations\\2022.1.0\\jetbrains.annotations.2022.1.0.nupkg.sha512",

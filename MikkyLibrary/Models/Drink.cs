@@ -7,6 +7,11 @@ namespace MikkyLibrary.Models
 {
     public partial class Drink
     {
+        public Drink()
+        {
+            OrderDetails = new HashSet<OrderDetail>();
+        }
+
         public int DrinkId { get; set; }
         public string Drinkname { get; set; }
         public int DrinkCateId { get; set; }
@@ -15,5 +20,6 @@ namespace MikkyLibrary.Models
         public double? Price { get; set; }
 
         public virtual DrinkCategory DrinkCate { get; set; }
+        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
     }
 }

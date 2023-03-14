@@ -9974,19 +9974,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\ADMIN\\.nuget\\packages\\": {}
+    "C:\\Users\\ADMIN\\.nuget\\packages\\": {},
+    "A:\\Microsoft Visual Studio\\Tools\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\VisualStudioCommunityProjects\\MikkyShopManagement\\MikkyShopBackEnd\\MikkyShopBackEnd.csproj",
+      "projectUniqueName": "D:\\VisualStudioCommunityProjects\\MikkyShopAPIBox\\MikkyShopBackEnd\\MikkyShopBackEnd.csproj",
       "projectName": "MikkyShopBackEnd",
-      "projectPath": "D:\\VisualStudioCommunityProjects\\MikkyShopManagement\\MikkyShopBackEnd\\MikkyShopBackEnd.csproj",
+      "projectPath": "D:\\VisualStudioCommunityProjects\\MikkyShopAPIBox\\MikkyShopBackEnd\\MikkyShopBackEnd.csproj",
       "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
-      "outputPath": "D:\\VisualStudioCommunityProjects\\MikkyShopManagement\\MikkyShopBackEnd\\obj\\",
+      "outputPath": "D:\\VisualStudioCommunityProjects\\MikkyShopAPIBox\\MikkyShopBackEnd\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "A:\\Microsoft Visual Studio\\Tools\\NuGetPackages"
+      ],
       "configFilePaths": [
         "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -10000,8 +10005,8 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "D:\\VisualStudioCommunityProjects\\MikkyShopManagement\\MikkyLibrary\\MikkyLibrary.csproj": {
-              "projectPath": "D:\\VisualStudioCommunityProjects\\MikkyShopManagement\\MikkyLibrary\\MikkyLibrary.csproj"
+            "D:\\VisualStudioCommunityProjects\\MikkyShopAPIBox\\MikkyLibrary\\MikkyLibrary.csproj": {
+              "projectPath": "D:\\VisualStudioCommunityProjects\\MikkyShopAPIBox\\MikkyLibrary\\MikkyLibrary.csproj"
             }
           }
         }
@@ -10080,7 +10085,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.103\\RuntimeIdentifierGraph.json"
       }
     }
   }

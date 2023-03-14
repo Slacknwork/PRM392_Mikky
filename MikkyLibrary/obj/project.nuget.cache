@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Hr6W6RJPTO/8jtf7G5x48S47Qf5hPd6pnoVE5Xw13rG8wjL6/+ZtnU8eGvatRzwzZdXrY7HIF+WOvpO7R3t4mQ==",
+  "dgSpecHash": "bsCs5the6eo9KtnB3VcqDy3Mg1VQzvq6c6i/+G34WbieO2MVPILVkZ4gft1I395B1bzDxcqO5nkg7z2eYO89+Q==",
   "success": true,
-  "projectFilePath": "D:\\VisualStudioCommunityProjects\\MikkyShopManagement\\MikkyLibrary\\MikkyLibrary.csproj",
+  "projectFilePath": "D:\\VisualStudioCommunityProjects\\MikkyShopAPIBox\\MikkyLibrary\\MikkyLibrary.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ADMIN\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\ADMIN\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
