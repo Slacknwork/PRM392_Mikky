@@ -42,7 +42,6 @@ namespace MikkyLibrary.Models
             var strConn = config["ConnectionStrings:Mikky"];
             return strConn;
         }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1_CI_AS");
@@ -63,13 +62,13 @@ namespace MikkyLibrary.Models
                     .WithMany(p => p.Drinks)
                     .HasForeignKey(d => d.DrinkCateId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Drink__DrinkCate__3B75D760");
+                    .HasConstraintName("FK__Drink__DrinkCate__60A75C0F");
             });
 
             modelBuilder.Entity<DrinkCategory>(entity =>
             {
                 entity.HasKey(e => e.DrinkCateId)
-                    .HasName("PK__DrinkCat__1410FD8718663686");
+                    .HasName("PK__DrinkCat__1410FD874E18804D");
 
                 entity.ToTable("DrinkCategory");
 
@@ -98,30 +97,31 @@ namespace MikkyLibrary.Models
                     .WithMany(p => p.Orders)
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Order__UserID__3E52440B");
+                    .HasConstraintName("FK__Order__UserID__6383C8BA");
             });
 
             modelBuilder.Entity<OrderDetail>(entity =>
             {
-                entity.HasNoKey();
+                entity.HasKey(e => new { e.OrderId, e.DrinkId })
+                    .HasName("PK__OrderDet__5F991693E4016F11");
 
                 entity.ToTable("OrderDetail");
 
-                entity.Property(e => e.DrinkId).HasColumnName("DrinkID");
-
                 entity.Property(e => e.OrderId).HasColumnName("OrderID");
 
+                entity.Property(e => e.DrinkId).HasColumnName("DrinkID");
+
                 entity.HasOne(d => d.Drink)
-                    .WithMany()
+                    .WithMany(p => p.OrderDetails)
                     .HasForeignKey(d => d.DrinkId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__OrderDeta__Drink__412EB0B6");
+                    .HasConstraintName("FK__OrderDeta__Drink__66603565");
 
                 entity.HasOne(d => d.Order)
-                    .WithMany()
+                    .WithMany(p => p.OrderDetails)
                     .HasForeignKey(d => d.OrderId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__OrderDeta__Order__403A8C7D");
+                    .HasConstraintName("FK__OrderDeta__Order__656C112C");
             });
 
             modelBuilder.Entity<User>(entity =>

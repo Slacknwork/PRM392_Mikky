@@ -67,7 +67,7 @@ namespace MikkyLibrary.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.HasKey("DrinkCateId")
-                        .HasName("PK__DrinkCat__1410FD8718663686");
+                        .HasName("PK__DrinkCat__1410FD874E18804D");
 
                     b.ToTable("DrinkCategory");
                 });
@@ -104,13 +104,13 @@ namespace MikkyLibrary.Migrations
 
             modelBuilder.Entity("MikkyLibrary.Models.OrderDetail", b =>
                 {
-                    b.Property<int>("DrinkId")
-                        .HasColumnType("int")
-                        .HasColumnName("DrinkID");
-
                     b.Property<int>("OrderId")
                         .HasColumnType("int")
                         .HasColumnName("OrderID");
+
+                    b.Property<int>("DrinkId")
+                        .HasColumnType("int")
+                        .HasColumnName("DrinkID");
 
                     b.Property<double?>("Price")
                         .HasColumnType("float");
@@ -118,9 +118,10 @@ namespace MikkyLibrary.Migrations
                     b.Property<int?>("Quantity")
                         .HasColumnType("int");
 
-                    b.HasIndex("DrinkId");
+                    b.HasKey("OrderId", "DrinkId")
+                        .HasName("PK__OrderDet__5F991693E4016F11");
 
-                    b.HasIndex("OrderId");
+                    b.HasIndex("DrinkId");
 
                     b.ToTable("OrderDetail");
                 });
@@ -162,7 +163,7 @@ namespace MikkyLibrary.Migrations
                     b.HasOne("MikkyLibrary.Models.DrinkCategory", "DrinkCate")
                         .WithMany("Drinks")
                         .HasForeignKey("DrinkCateId")
-                        .HasConstraintName("FK__Drink__DrinkCate__3B75D760")
+                        .HasConstraintName("FK__Drink__DrinkCate__60A75C0F")
                         .IsRequired();
 
                     b.Navigation("DrinkCate");
@@ -173,7 +174,7 @@ namespace MikkyLibrary.Migrations
                     b.HasOne("MikkyLibrary.Models.User", "User")
                         .WithMany("Orders")
                         .HasForeignKey("UserId")
-                        .HasConstraintName("FK__Order__UserID__3E52440B")
+                        .HasConstraintName("FK__Order__UserID__6383C8BA")
                         .IsRequired();
 
                     b.Navigation("User");
@@ -182,15 +183,15 @@ namespace MikkyLibrary.Migrations
             modelBuilder.Entity("MikkyLibrary.Models.OrderDetail", b =>
                 {
                     b.HasOne("MikkyLibrary.Models.Drink", "Drink")
-                        .WithMany()
+                        .WithMany("OrderDetails")
                         .HasForeignKey("DrinkId")
-                        .HasConstraintName("FK__OrderDeta__Drink__412EB0B6")
+                        .HasConstraintName("FK__OrderDeta__Drink__66603565")
                         .IsRequired();
 
                     b.HasOne("MikkyLibrary.Models.Order", "Order")
-                        .WithMany()
+                        .WithMany("OrderDetails")
                         .HasForeignKey("OrderId")
-                        .HasConstraintName("FK__OrderDeta__Order__403A8C7D")
+                        .HasConstraintName("FK__OrderDeta__Order__656C112C")
                         .IsRequired();
 
                     b.Navigation("Drink");
@@ -198,9 +199,19 @@ namespace MikkyLibrary.Migrations
                     b.Navigation("Order");
                 });
 
+            modelBuilder.Entity("MikkyLibrary.Models.Drink", b =>
+                {
+                    b.Navigation("OrderDetails");
+                });
+
             modelBuilder.Entity("MikkyLibrary.Models.DrinkCategory", b =>
                 {
                     b.Navigation("Drinks");
+                });
+
+            modelBuilder.Entity("MikkyLibrary.Models.Order", b =>
+                {
+                    b.Navigation("OrderDetails");
                 });
 
             modelBuilder.Entity("MikkyLibrary.Models.User", b =>
