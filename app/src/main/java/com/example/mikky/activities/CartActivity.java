@@ -38,21 +38,22 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class CartActivity extends AppCompatActivity {
-     int drinkId, quantity;
-     Drink drink;
-     RecyclerView rcvCart;
-     CartAdapter cartAdapter;
-     List<Drink> listDrink = new ArrayList<>();
-     List<Integer> listQuantity = new ArrayList<>();
-     ApiInterface apiInterface;
-     OrderInterface orderInterface;
-     String name,img;
-     Double price,totalPrice = Double.valueOf(0);
-     TextView tp;
-     Button btnOrder, btnContinue;
-    Order order = new Order();
-    OrderDetail orderDetail = new OrderDetail();
-    List<OrderDetail> listOD = new ArrayList<>();
+    private int drinkId, quantity, shSize;
+    private Drink drink;
+    private RecyclerView rcvCart;
+    private CartAdapter cartAdapter;
+    private List<Drink> listDrink = new ArrayList<>();
+    private List<Integer> listQuantity = new ArrayList<>();
+    private ApiInterface apiInterface;
+    private OrderInterface orderInterface;
+    private String name,img;
+    private Double price,totalPrice = Double.valueOf(0);
+    private TextView tp;
+    private TextView textEmpty;
+    private Button btnOrder, btnContinue;
+    private Order order = new Order();
+    private OrderDetail orderDetail = new OrderDetail();
+    private List<OrderDetail> listOD = new ArrayList<>();
 
     DecimalFormat df = new DecimalFormat("###,###,###");
 
@@ -64,6 +65,7 @@ public class CartActivity extends AppCompatActivity {
         btnOrder = findViewById(R.id.btnPay);
         btnContinue = findViewById(R.id.btnContinueShopping);
         tp = findViewById(R.id.total_price);
+        textEmpty = findViewById(R.id.empty);
         rcvCart = findViewById(R.id.cart_list);
         cartAdapter = new CartAdapter(this);
 
@@ -72,8 +74,9 @@ public class CartActivity extends AppCompatActivity {
 
         SharedPreferences shCart = this.getSharedPreferences("Cart", MODE_PRIVATE);
         SharedPreferences shUser = this.getSharedPreferences("User", MODE_PRIVATE);
+        shSize = shCart.getAll().size() / 5;
 
-        for(int i =1; i<=10; i++) {
+        for(int i =1; i<=shSize; i++) {
             drinkId=shCart.getInt("DrinkId"+i, 0);
             quantity=shCart.getInt("Quantity"+i, 0);
             price = Double.valueOf(shCart.getFloat("Price"+i,0));
@@ -81,9 +84,9 @@ public class CartActivity extends AppCompatActivity {
             img = shCart.getString("Image"+i,"");
             shUser.getInt("UserID",0);
             totalPrice += price*quantity;
-
             if (drinkId > 0 ){
                 drink = new Drink();
+                orderDetail = new OrderDetail();
                 drink.setDrinkId(drinkId);
                 drink.setDrinkname(name);
                 drink.setDrinkImage(img);
@@ -96,6 +99,7 @@ public class CartActivity extends AppCompatActivity {
                 listDrink.add(drink);
                 listQuantity.add(quantity);
                 listOD.add(orderDetail);
+                //Toast.makeText(CartActivity.this,orderDetail.getDrinkId()+":" + orderDetail.getPrice()+":"+orderDetail.getQuantity(),Toast.LENGTH_SHORT).show();
             }
         }
 
@@ -103,6 +107,10 @@ public class CartActivity extends AppCompatActivity {
         rcvCart.setAdapter(cartAdapter);
         cartAdapter.notifyDataSetChanged();
         tp.setText(df.format(totalPrice) + " đồng");
+
+        if (listDrink.size() == 0){
+            textEmpty.setVisibility(View.VISIBLE);
+        }else textEmpty.setVisibility(View.INVISIBLE);
 
         btnContinue.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -128,20 +136,24 @@ public class CartActivity extends AppCompatActivity {
                     public void onResponse(Call<Order> call, Response<Order> response) {
                         if (response.isSuccessful()){
                             if (response.body() !=null) {
-                                Toast.makeText(CartActivity.this,"Place Order",Toast.LENGTH_SHORT).show();
-                                /*for (OrderDetail od : listOD){
+                                Toast.makeText(CartActivity.this, "Place Order!", Toast.LENGTH_SHORT).show();
+                                for (OrderDetail od : listOD){
                                     od.setOrderId(response.body().getOrderId());
-                                    Toast.makeText(CartActivity.this,od.getDrinkId()+":" + od.getOrderId()+":" +od.getQuantity()+":" + +od.getPrice(),Toast.LENGTH_SHORT).show();
+                                    //Toast.makeText(CartActivity.this,od.getDrinkId()+":" + od.getOrderId()+":" +od.getQuantity()+":" + +od.getPrice(),Toast.LENGTH_SHORT).show();
                                     orderInterface.createOrderDetail(od).enqueue(new Callback<OrderDetail>() {
                                         @Override
                                         public void onResponse(Call<OrderDetail> call, Response<OrderDetail> response) {
                                             if (response.isSuccessful()) {
                                                 if (response.body() != null) {
-                                                    Toast.makeText(CartActivity.this, "Place Order Detail", Toast.LENGTH_SHORT).show();
+                                                    SharedPreferences.Editor editCart = shCart.edit();
+                                                    editCart.clear();
+                                                    editCart.apply();
+                                                    finish();
+                                                    startActivity(getIntent());
                                                 }else {
-                                                    Toast.makeText(CartActivity.this, "Place Order Detail Fail", Toast.LENGTH_SHORT).show();
+                                                    Toast.makeText(CartActivity.this, "Place Order Fail!", Toast.LENGTH_SHORT).show();
                                                 }
-                                            }else Toast.makeText(CartActivity.this, "Not success detail", Toast.LENGTH_SHORT).show();
+                                            }else Toast.makeText(CartActivity.this, "Not success", Toast.LENGTH_SHORT).show();
                                         }
 
                                         @Override
@@ -149,7 +161,7 @@ public class CartActivity extends AppCompatActivity {
 
                                         }
                                     });
-                                }*/
+                                }
                             }else {
                                 Toast.makeText(CartActivity.this,"Order Fail!",Toast.LENGTH_SHORT).show();
                             }
@@ -182,6 +194,7 @@ public class CartActivity extends AppCompatActivity {
                         list.setPrice(response.body().getPrice());
                         list.setDrinkImage(response.body().getDrinkImage());
                         cartAdapter.notifyDataSetChanged();
+                        return;
                     }else{
                         Toast.makeText(CartActivity.this,"Fail!",Toast.LENGTH_SHORT).show();
                     }
