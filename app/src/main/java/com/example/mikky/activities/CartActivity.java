@@ -76,7 +76,7 @@ public class CartActivity extends AppCompatActivity {
         SharedPreferences shUser = this.getSharedPreferences("User", MODE_PRIVATE);
         shSize = shCart.getAll().size() / 5;
 
-        for(int i =1; i<=shSize; i++) {
+        for(int i =1; i<=10; i++) {
             drinkId=shCart.getInt("DrinkId"+i, 0);
             quantity=shCart.getInt("Quantity"+i, 0);
             price = Double.valueOf(shCart.getFloat("Price"+i,0));
