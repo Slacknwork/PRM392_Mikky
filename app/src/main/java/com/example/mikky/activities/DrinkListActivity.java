@@ -68,6 +68,10 @@ public class DrinkListActivity extends AppCompatActivity {
                 Intent intentCart = new Intent(DrinkListActivity.this, CartActivity.class);
                 startActivity(intentCart);
                 break;
+            case R.id.history:
+                Intent intentHistory = new Intent(DrinkListActivity.this, OrderActivity.class);
+                startActivity(intentHistory);
+                break;
             case R.id.exit:
                 Intent intentLogout = new Intent(DrinkListActivity.this, LoginActivity.class);
                 startActivity(intentLogout);
@@ -90,7 +94,6 @@ public class DrinkListActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<Drink>> call, Response<List<Drink>> response) {
                 if (response.isSuccessful()){
-
                     if (response.body() != null){
                         for( Drink d : response.body()){
                             list.add(d);

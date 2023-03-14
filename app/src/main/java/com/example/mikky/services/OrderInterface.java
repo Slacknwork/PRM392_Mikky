@@ -17,11 +17,13 @@ public interface OrderInterface {
     @GET("OrderDetail")
     Call<List<OrderDetail>> getAllOrderDetail();
     @GET("Order/Ordid={orderId}")
-    Call<Order> getOrder(@Path(value = "orderId", encoded = true)int orderId);
+    Call<List<Order>> getOrderByOrder(@Path(value = "orderId")int orderId);
+    @GET("Order/Userid={userId}")
+    Call<List<Order>> getOrderByUser(@Path(value = "userId")int userId);
     @GET("OrderDetail/Order/Ordetid={orderId}")
-    Call<OrderDetail> getOrderDetailByOrderId(@Path(value = "orderId", encoded = true)int orderId);
+    Call<OrderDetail> getOrderDetailByOrderId(@Path(value = "orderId")int orderId);
     @GET("OrderDetail/Drink/Drid={drinkId}")
-    Call<OrderDetail> getOrderDetailByDrinkId(@Path(value = "drinkId", encoded = true)int drinkId);
+    Call<OrderDetail> getOrderDetailByDrinkId(@Path(value = "drinkId")int drinkId);
     @POST("Order/create")
     Call<Order> createOrder(@Body Order order);
     @POST("OrderDetail/create")

@@ -118,6 +118,10 @@ public class DetailActivity extends AppCompatActivity {
                 Intent intentLogout = new Intent(DetailActivity.this, LoginActivity.class);
                 startActivity(intentLogout);
                 break;
+            case R.id.history:
+                Intent intentHistory = new Intent(DetailActivity.this, OrderActivity.class);
+                startActivity(intentHistory);
+                break;
             case android.R.id.home:
                 finish();
                 break;
