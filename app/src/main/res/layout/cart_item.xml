@@ -23,7 +23,7 @@
             android:text="Trà Sữa 1"
             android:layout_toEndOf="@id/cart_img"
             android:layout_centerVertical="true"
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="10dp"
             android:textSize="16sp"
             android:textColor="@color/black"/>
 
@@ -34,7 +34,7 @@
             android:text="10000đ"
             android:layout_toEndOf="@id/cart_name"
             android:layout_centerVertical="true"
-            android:layout_marginStart="30dp"
+            android:layout_marginStart="10dp"
             android:textSize="16sp"
             android:textColor="@color/black"/>
         <TextView
@@ -47,6 +47,19 @@
             android:layout_marginStart="20dp"
             android:textSize="16sp"
             android:textColor="@color/black"/>
+        <ImageButton
+            android:id="@+id/remove_cart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Delete"
+            android:src="@drawable/ic_remove"
+            android:layout_toEndOf="@id/quantity"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="20dp"
+            android:textSize="16sp"
+            android:background="@color/white"
+            android:textColor="@color/white"
+            android:clickable="true"/>
     </RelativeLayout>
 
 </androidx.cardview.widget.CardView>
