@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mikky.R;
 import com.example.mikky.activities.CartActivity;
+import com.example.mikky.activities.DetailActivity;
 import com.example.mikky.activities.DrinkListActivity;
 import com.example.mikky.models.Drink;
 import com.squareup.picasso.Picasso;
@@ -90,6 +91,14 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
             item_quantity = itemView.findViewById(R.id.quantity);
             item_remove = itemView.findViewById(R.id.remove_cart);
 
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(mContext, DetailActivity.class);
+                    intent.putExtra("putIdToDetail", mlist.get(getAdapterPosition()).getDrinkId());
+                    mContext.startActivity(intent);
+                }
+            });
 
             item_remove.setOnClickListener(new View.OnClickListener() {
                 @Override

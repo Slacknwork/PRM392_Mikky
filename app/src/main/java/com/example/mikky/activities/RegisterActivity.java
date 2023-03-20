@@ -54,7 +54,7 @@ public class RegisterActivity extends AppCompatActivity {
                 String pw = password.getText().toString();
                 String ar = address.getText().toString();
                 String p = phone.getText().toString();
-                if ((TextUtils.isEmpty(userName) && TextUtils.isEmpty(pw)) || pw.length() < 6 ){
+                if ((TextUtils.isEmpty(userName) && TextUtils.isEmpty(pw)) || pw.length() < 6 || p.length() > 11 || p.length() < 10){
                     progressBar.setVisibility(View.GONE);
                     Toast.makeText(RegisterActivity.this,"Please enter matching requirement!",Toast.LENGTH_SHORT).show();
                 }else {

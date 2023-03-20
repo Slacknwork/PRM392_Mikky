@@ -13,4 +13,6 @@ public interface ApiInterface {
     Call<List<Drink>> getListDrink();
     @GET("Drink/Drid={id}")
     Call<Drink> getItem(@Path(value = "id")int id);
+    @GET("Drink/Drname={name}")
+    Call<List<Drink>> getItemByName(@Path(value = "name")String name);
 }
