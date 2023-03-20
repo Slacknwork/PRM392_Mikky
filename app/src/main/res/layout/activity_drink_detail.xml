@@ -92,7 +92,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
                 android:backgroundTint="#00BCD4"
-                android:text="Add Cart" />
+                android:text="Add to Cart" />
 
         </LinearLayout>
     </LinearLayout>

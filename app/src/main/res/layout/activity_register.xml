@@ -80,7 +80,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:ems="10"
-        android:hint="Phone number"
+        android:hint="Phone number (10-11 numbers)"
         android:inputType="text"
         android:textSize="24sp"
         android:padding="10dp"
